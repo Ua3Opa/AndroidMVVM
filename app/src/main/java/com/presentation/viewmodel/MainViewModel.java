@@ -1,8 +1,5 @@
 package com.presentation.viewmodel;
 
-import android.app.Application;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
@@ -11,6 +8,7 @@ import com.presentation.entity.Result;
 import com.presentation.entity.TestData;
 import com.presentation.internal.ComponentHolder;
 import com.presentation.model.MainModelImp;
+import com.presentation.view.activity.MainActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,8 +24,8 @@ public class MainViewModel extends BaseViewModel {
     MainModelImp mainModel;
 
     @Inject
-    public MainViewModel(@NonNull Application application) {
-        super(application);
+    public MainViewModel(@NonNull MainActivity activity) {
+        super(activity);
         ComponentHolder.getApplicationComponent().inject(this);
     }
 
@@ -36,8 +34,8 @@ public class MainViewModel extends BaseViewModel {
         parameters.put("code", 1);
 
         mUserCase.withFunctional(mainModel::getTestData, parameters)
+                .compose(getLifecycleTransformer())
                 .<Result<List<TestData>>>withProcessor(result -> {
-                    Log.d("TAG", "getData: " + JSON.toJSONString(result));
                     handleGetListData(result);
                 }).execute();
 

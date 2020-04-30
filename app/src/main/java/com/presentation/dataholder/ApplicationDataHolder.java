@@ -9,6 +9,4 @@ public class ApplicationDataHolder {
     public ApplicationDataHolder() {
     }
 
-
-
 }

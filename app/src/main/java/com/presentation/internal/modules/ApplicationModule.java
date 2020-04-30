@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import com.presentation.ProjectApplication;
 import com.presentation.config.Config;
 import com.presentation.data.excutor.JobExecutor;
+import com.presentation.database.DaoHelper;
 import com.presentation.domain.executor.ThreadExecutor;
 
 import javax.inject.Singleton;
@@ -48,4 +49,9 @@ public class ApplicationModule {
         return context.getSharedPreferences(Config.SP_NAME,Context.MODE_PRIVATE);
     }
 
+    @Provides
+    @Singleton
+    DaoHelper provideDaoHelper(Application application){
+        return new DaoHelper(application);
+    }
 }

@@ -11,6 +11,4 @@ public class MainDataHolder {
     public MainDataHolder() {
     }
 
-
-
 }

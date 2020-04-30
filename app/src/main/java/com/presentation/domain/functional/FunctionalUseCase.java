@@ -2,7 +2,7 @@ package com.presentation.domain.functional;
 
 import com.presentation.domain.executor.ThreadExecutor;
 import com.presentation.domain.interator.UseCase;
-import com.presentation.entity.Result;
+import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import java.util.Map;
 
@@ -16,7 +16,7 @@ public class FunctionalUseCase extends UseCase {
     private Functional0 mFunction;
     private ResultObservable mObservable;
     private Map<String, Object> mParameter;
-
+    private LifecycleTransformer mTransformer;
     @Inject
     public FunctionalUseCase(ThreadExecutor threadExecutor) {
         super(threadExecutor);
@@ -38,8 +38,13 @@ public class FunctionalUseCase extends UseCase {
         return this;
     }
 
+    public FunctionalUseCase compose(LifecycleTransformer lifecycleTransformer){
+        mTransformer = lifecycleTransformer;
+        return this;
+    }
+
     public void execute() {
-        super.execute(mObservable, null);
+        super.execute(mObservable, mTransformer,null);
     }
 
 }

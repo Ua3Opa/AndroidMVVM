@@ -1,6 +1,5 @@
 package com.presentation.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.SharedPreferences;
@@ -49,5 +48,7 @@ public class MainActivity extends BaseActivity {
         super.onResume();
         mMainViewModel.getData();
     }
+
+
 
 }

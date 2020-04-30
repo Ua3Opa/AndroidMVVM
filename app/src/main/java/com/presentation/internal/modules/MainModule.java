@@ -1,13 +1,5 @@
 package com.presentation.internal.modules;
 
-import android.app.Application;
-
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
-import com.presentation.domain.executor.ThreadExecutor;
-import com.presentation.domain.functional.FunctionalUseCase;
-import com.presentation.model.MainModel;
 import com.presentation.view.activity.MainActivity;
 import com.presentation.viewmodel.MainViewModel;
 
@@ -29,7 +21,7 @@ public class MainModule {
     }
 
     @Provides
-    MainViewModel provideMainViewModel(Application mainActivity) {
+    MainViewModel provideMainViewModel(MainActivity mainActivity) {
         return new MainViewModel(mainActivity);
     }
 

@@ -2,9 +2,9 @@ package com.presentation.config;
 
 public enum Exceptions {
 
-    JSON_PARSE_EXCEPTION(0, "Json解析异常"),
-    NETWORK_EXCEPTION(1, "网络异常"),
-    UNKNOWN_EXCEPTION(-1, "未知错误");
+    UNKNOWN_EXCEPTION(-1, "未知错误"),
+    JSON_PARSE_EXCEPTION(0, "数据解析异常"),
+    NETWORK_EXCEPTION(1, "网络异常");
 
     private int ExceptionCode;
     private String ExceptionMessage;

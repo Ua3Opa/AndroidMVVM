@@ -4,8 +4,6 @@ import com.presentation.config.Urls;
 import com.presentation.network.Interceptors.LoggerInterceptor;
 import com.presentation.network.Interceptors.ParamaterInterceptor;
 
-import java.net.URL;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 

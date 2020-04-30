@@ -1,13 +1,11 @@
 package com.presentation.internal.components;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.presentation.ProjectApplication;
-import com.presentation.data.excutor.JobExecutor;
+import com.presentation.database.DaoHelper;
 import com.presentation.domain.executor.ThreadExecutor;
-import com.presentation.domain.interator.UseCase;
 import com.presentation.internal.modules.ApplicationModule;
 import com.presentation.viewmodel.MainViewModel;
 
@@ -28,4 +26,6 @@ public interface ApplicationComponent {
     SharedPreferences provideSharedPreferences();
 
     ThreadExecutor provideJobExecutor();
+
+    DaoHelper provideDaoHelper();
 }

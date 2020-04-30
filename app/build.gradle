@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'org.greenrobot.greendao'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -30,6 +32,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    greendao {
+        schemaVersion 1 //当前数据库版本
+    }
+
 }
 
 dependencies {
@@ -41,14 +47,19 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation "androidx.navigation:navigation-fragment:${navigationFragmentVersion}"
+    implementation "androidx.navigation:navigation-fragment:2.2.2"
     implementation "androidx.navigation:navigation-ui:2.2.2"
 
     implementation 'com.google.dagger:dagger:2.27'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.27'
 
+    implementation "io.reactivex.rxjava2:rxjava:2.2.6"
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.1'
+
+    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.2.2'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.2'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
+
 
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
@@ -57,4 +68,7 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.2.68'
     implementation 'android.arch.lifecycle:common:1.1.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    implementation 'org.greenrobot:greendao:3.2.2'
+
 }

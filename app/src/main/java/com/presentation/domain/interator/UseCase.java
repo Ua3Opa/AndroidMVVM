@@ -1,7 +1,7 @@
 package com.presentation.domain.interator;
 
-import com.presentation.data.excutor.JobExecutor;
 import com.presentation.domain.executor.ThreadExecutor;
+import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
@@ -26,6 +26,14 @@ public abstract class UseCase<T, Params> {
     protected void execute(DisposableObserver<T> observer, Params params) {
         Observable<T> observable = this.buildUseCaseObservable(params)
                 .subscribeOn(Schedulers.from(threadExecutor))
+                .observeOn(AndroidSchedulers.mainThread());
+        disposables.add(observable.subscribeWith(observer));
+    }
+
+    protected void execute(DisposableObserver<T> observer, LifecycleTransformer transformer, Params params) {
+        Observable<T> observable = this.buildUseCaseObservable(params)
+                .subscribeOn(Schedulers.from(threadExecutor))
+                .compose(transformer)
                 .observeOn(AndroidSchedulers.mainThread());
         disposables.add(observable.subscribeWith(observer));
     }
