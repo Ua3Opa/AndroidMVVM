@@ -5,52 +5,34 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import java.io.IOException;
-import java.net.URLDecoder;
-
-import okhttp3.FormBody;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
+import retrofit2.internal.EverythingIsNonNull;
 
 public class LoggerInterceptor implements Interceptor {
     private static String TAG = "LoggerInterceptor";
 
     @Override
+    @NonNull
     public Response intercept(@NonNull Chain chain) throws IOException {
+        //Chain 里包含了request和response
         Request request = chain.request();
-        long startTime = System.currentTimeMillis();
+        long t1 = System.nanoTime();//请求发起的时间
+        Log.i(TAG,String.format("发送请求 %s on %s%n%s",request.url(),chain.connection(),request.headers()));
         Response response = chain.proceed(request);
-        long endTime = System.currentTimeMillis();
-        long duration = endTime - startTime;
-        okhttp3.MediaType mediaType = response.body().contentType();
-        String content = response.body().string();
-        Log.i(TAG, "intercept: "+"\n");
-        Log.i(TAG, "----------Start----------------");
-        try {
-            Log.i(TAG, "| " + URLDecoder.decode(request.toString(), "UTF-8"));
-        } catch (Exception ex) {
-            Log.i(TAG, "Exception | " + ex.getMessage());
-        }
-
-        String method = request.method();
-        //打印post请求参数
-        if ("POST".equals(method)) {
-            StringBuilder sb = new StringBuilder();
-            if (request.body() instanceof FormBody) {
-                FormBody body = (FormBody) request.body();
-                for (int i = 0; i < body.size(); i++) {
-                    sb.append(body.encodedName(i)).append("=").append(body.encodedValue(i)).append(",");
-                }
-                if (sb.length() >= 1) {
-                    sb.delete(sb.length() - 1, sb.length());
-                }
-                Log.i(TAG, "| RequestParams:{" + sb.toString() + "}");
-            }
-        }
-        Log.i(TAG, "| Response:" + content);
-        Log.i(TAG, "----------End:" + duration + "毫秒----------");
-        return response.newBuilder()
-                .body(okhttp3.ResponseBody.create(mediaType, content))
-                .build();
+        long t2 = System.nanoTime();//收到响应的时间
+        //不能直接使用response.body（）.string()的方式输出日志
+        //因为response.body().string()之后，response中的流会被关闭，程序会报错，
+        // 我们需要创建出一个新的response给应用层处理
+        ResponseBody responseBody = response.peekBody(1024 * 1024);
+        Log.i(TAG,String.format("接收响应：[%s] %n返回json:%s  %.1fms%n%s",
+                response.request().url(),
+                responseBody.string(),
+                (t2-t1) /1e6d,
+                response.headers()
+        ));
+        return response;
     }
 }

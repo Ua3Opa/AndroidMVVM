@@ -18,7 +18,6 @@ public class DaoHelper {
 
     private static final String DAO_USER = "user.db";
 
-    private Application mApplication;
     private final DaoMaster.DevOpenHelper mDaoOpenHelper;
     private final DaoMaster mDaoMaster;
     private final DaoSession mDaoSession;
@@ -26,7 +25,6 @@ public class DaoHelper {
 
     @Inject
     public DaoHelper(Application application) {
-        this.mApplication = application;
         mDaoOpenHelper = new DaoMaster.DevOpenHelper(application, DAO_USER);
         mDaoMaster = new DaoMaster(getWritableDatabase());
         mDaoSession = mDaoMaster.newSession();
