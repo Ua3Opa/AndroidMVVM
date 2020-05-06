@@ -17,6 +17,7 @@ public class FunctionalUseCase extends UseCase {
     private ResultObservable mObservable;
     private Map<String, Object> mParameter;
     private LifecycleTransformer mTransformer;
+
     @Inject
     public FunctionalUseCase(ThreadExecutor threadExecutor) {
         super(threadExecutor);

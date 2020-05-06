@@ -11,6 +11,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 
 public class ResultObservable<T> extends DisposableObserver<T> {
+
     private static final String TAG = "ResultObservable";
     private Effect0<T> mEffect0;
 
@@ -20,13 +21,11 @@ public class ResultObservable<T> extends DisposableObserver<T> {
 
     @Override
     public void onNext(@NonNull T result) {
-        Log.d(TAG, "onNext: ");
         mEffect0.apply(result);
     }
 
     @Override
     public void onError(@NonNull Throwable e) {
-        Log.d(TAG, "onError: " + e.getMessage());
         handleErrorException(e);
     }
 
@@ -42,6 +41,5 @@ public class ResultObservable<T> extends DisposableObserver<T> {
 
     @Override
     public void onComplete() {
-        Log.d("TAG", "onComplete: ");
     }
 }

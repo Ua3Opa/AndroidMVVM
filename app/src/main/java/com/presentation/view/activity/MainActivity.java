@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.persentation.R;
 import com.persentation.databinding.ActivityMainBinding;
+import com.presentation.dataholder.ApplicationDataHolder;
 import com.presentation.internal.ComponentHolder;
 import com.presentation.internal.components.DaggerMainComponent;
 import com.presentation.internal.modules.MainModule;
@@ -23,11 +24,20 @@ public class MainActivity extends BaseActivity {
     @Inject
     MainViewModel mMainViewModel;
 
+    @Inject
+    ApplicationDataHolder applicationDataHolder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initInjector();
         initDataBinding();
+        initEvent();
+    }
+
+    private void initEvent() {
+        applicationDataHolder.netWorkState().observe(this,result->{
+        });
     }
 
     private void initDataBinding() {

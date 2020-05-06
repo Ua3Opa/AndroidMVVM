@@ -1,6 +1,6 @@
 package com.presentation.model;
 
-import com.presentation.service.MainApiService;
+import com.presentation.api.MainApiService;
 import java.util.Map;
 import javax.inject.Inject;
 

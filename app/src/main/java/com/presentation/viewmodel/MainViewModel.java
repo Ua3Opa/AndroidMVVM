@@ -18,7 +18,7 @@ import javax.inject.Inject;
 
 public class MainViewModel extends BaseViewModel {
 
-    public ObservableField<CharSequence> mainContent = new ObservableField<>();
+    public ObservableField<String> mainContent = new ObservableField<>();
 
     @Inject
     MainModelImp mainModel;
