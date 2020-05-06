@@ -2,9 +2,10 @@ package com.presentation.view.activity;
 
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
+import android.util.Log;
 import com.persentation.R;
 import com.persentation.databinding.ActivityMainBinding;
 import com.presentation.dataholder.ApplicationDataHolder;
@@ -26,22 +27,17 @@ public class MainActivity extends BaseActivity {
 
     @Inject
     ApplicationDataHolder applicationDataHolder;
+    private ActivityMainBinding viewDataBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initInjector();
         initDataBinding();
-        initEvent();
-    }
-
-    private void initEvent() {
-        applicationDataHolder.netWorkState().observe(this,result->{
-        });
     }
 
     private void initDataBinding() {
-        ActivityMainBinding viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         viewDataBinding.setMainViewModel(mMainViewModel);
     }
 
@@ -57,6 +53,18 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         mMainViewModel.getData();
+
+        initEvent();
+
+    }
+
+    private void initEvent() {
+//        applicationDataHolder.netWorkState().observe(this, result -> {
+//            Toast.makeText(this, "网络变动" + result, Toast.LENGTH_SHORT).show();
+//        });
+        applicationDataHolder.netWorkAvailable().observe(this, result -> {
+            Log.d(TAG, "initEvent网络可用: " + result);
+        });
     }
 
 

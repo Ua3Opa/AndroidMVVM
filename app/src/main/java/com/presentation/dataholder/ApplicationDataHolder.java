@@ -17,7 +17,7 @@ public class ApplicationDataHolder {
 
     MutableLiveData<NetWorkType> netWorkState = new MutableLiveData<>();
 
-    MutableLiveData<Boolean> netWorkAvailable = new MutableLiveData<>(false);
+    MutableLiveData<Boolean> netWorkAvailable = new MutableLiveData<>();
 
     public MutableLiveData<NetWorkType> netWorkState() {
         return netWorkState;
