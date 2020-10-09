@@ -77,13 +77,13 @@ public class SystemEventService extends Service {
             super.onCapabilitiesChanged(network, networkCapabilities);
             if (networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) {
                 if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                    applicationDataHolder.netWorkState().setValue(NetWorkType.WIFI);
+                    applicationDataHolder.netWorkState().postValue(NetWorkType.WIFI);
                     LogUtils.d("onCapabilitiesChanged: 网络类型为wifi");
                 } else if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                    applicationDataHolder.netWorkState().setValue(NetWorkType.CELLULAR);
+                    applicationDataHolder.netWorkState().postValue(NetWorkType.CELLULAR);
                     LogUtils.d("onCapabilitiesChanged: 蜂窝网络");
                 } else {
-                    applicationDataHolder.netWorkState().setValue(NetWorkType.OTHER);
+                    applicationDataHolder.netWorkState().postValue(NetWorkType.OTHER);
                     LogUtils.d("onCapabilitiesChanged: 其他网络");
                 }
             }

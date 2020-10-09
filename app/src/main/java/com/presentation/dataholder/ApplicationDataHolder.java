@@ -1,6 +1,5 @@
 package com.presentation.dataholder;
 
-import android.net.NetworkCapabilities;
 
 import androidx.lifecycle.MutableLiveData;
 

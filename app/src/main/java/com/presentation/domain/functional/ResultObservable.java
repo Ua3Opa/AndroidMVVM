@@ -1,8 +1,5 @@
 package com.presentation.domain.functional;
 
-
-import android.util.Log;
-
 import com.google.gson.JsonParseException;
 import com.presentation.config.Exceptions;
 import com.presentation.entity.Result;
